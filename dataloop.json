@@ -1,0 +1,199 @@
+{
+  "displayName": "GCS Hooks",
+  "name": "gcs-hooks",
+  "attributes": {
+    "Provider": "Google",
+    "Category": "Pipeline",
+    "Pipeline Type": "Node",
+    "Node Type":"Data"
+  },
+  "version": "1.0.0",
+  "icon": "icon-dl-function",
+  "scope": "project",
+  "context": {
+    "project": "952eeca4-32c1-4563-accf-1a96339c04b9"
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/gcs-hooks.git",
+    "gitTag": "v1.0.0"
+  },
+  "components": {
+    "pipelineNodes": [
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "gcs-hooks.export_annotation"
+        },
+        "name": "GCS Export Annotations",
+        "categories": ["data"],
+        "displayName": "GCS Export Annotations",
+        "description": "Export an item annotations to GCS bucket",
+        "scope": "project",
+        "configuration": {
+          "fields": [
+            {
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "GSC Export Annotations",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            },
+            {
+              "name": "bucket_name",
+              "title": "Bucket Name",
+              "props": {
+                "type": "string",
+                "required": true,
+                "placeholder": "Insert bucket name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            }
+          ]
+        }
+      },
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "gcs-hooks.import_annotation"
+        },
+        "name": "GCS Import Annotations",
+        "categories": ["data"],
+        "displayName": "GCS Import Annotations",
+        "description": "Import an annotations to an item from GCS bucket",
+        "scope": "project",
+        "configuration": {
+          "fields": [
+            {
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "GSC Import Annotations",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            },
+            {
+              "name": "bucket_name",
+              "title": "Bucket Name",
+              "props": {
+                "type": "string",
+                "required": true,
+                "placeholder": "Insert bucket name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            }
+          ]
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "gcs-hooks",
+        "entryPoint": "modules/gcs_hooks.py",
+        "className": "HookIntegrationGCS",
+        "initInputs": [
+          {
+            "type": "staring",
+            "name": "integration_name"
+          }
+        ],
+        "functions": [
+          {
+            "name": "export_annotation",
+            "description": "Export an item annotations to GCS bucket",
+            "input": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "displayIcon": "function",
+            "displayName": "GCS Export Annotations"
+          },
+          {
+            "name": "import_annotation",
+            "description": "Import an annotations to an item from GCS bucket",
+            "input": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "displayIcon": "function",
+            "displayName": "GCS Import Annotations"
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "gcs-hooks",
+        "moduleName": "gcs-hooks",
+        "runtime": {
+          "podType": "regular-xs",
+          "numReplicas": 1,
+          "concurrency": 10,
+          "pyPackages": {},
+          "singleAgent": false,
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 2,
+            "queueLength": 10
+          },
+          "preemptible": false,
+          "executionTimeout": 3600,
+          "drainTime": 600,
+          "onReset": "failed",
+          "runExecutionAsProcess": false
+        },
+        "maxAttempts": 3
+      }
+    ]
+  }
+}
