@@ -13,8 +13,7 @@ class HookIntegrationGCS(dl.BaseServiceRunner):
         try:
             _ = self.service_entity
             credentials = os.environ.get(integration_name)
-            print(integration_name)
-            print()
+            logger.info(f"integration_name = {integration_name}")
             credentials = json.loads(credentials)
             self.client = storage.Client.from_service_account_info(info=credentials)
         except AssertionError:
