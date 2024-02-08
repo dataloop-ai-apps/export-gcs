@@ -11,15 +11,22 @@ logger = logging.getLogger(name='GCS Export & Import')
 
 class HookIntegrationGCS(dl.BaseServiceRunner):
     def __init__(self, integration_name):
+        logger.info(f"integration_name = {integration_name}")
         credentials = os.environ.get(integration_name.replace('-', '_'))
         if credentials is not None:
-            logger.info(f"integration_name = {integration_name}")
-            credentials = base64.b64decode(credentials)
-            credentials = credentials.decode("utf-8")
-            credentials = json.loads(credentials)
-            credentials = json.loads(credentials['content'])
+            try:
+                # for case of secret
+                credentials = json.loads(credentials)
+            except json.JSONDecodeError:
+                # for case of integration
+                logger.info(f"integration_name = {integration_name}")
+                credentials = base64.b64decode(credentials)
+                credentials = credentials.decode("utf-8")
+                credentials = json.loads(credentials)
+                credentials = json.loads(credentials['content'])
             self.client = storage.Client.from_service_account_info(info=credentials)
         else:
+            # for local development
             self.client = storage.Client.from_service_account_json(os.path.join('..', 'gcp-credentials.json'))
 
     def export_annotation(self, item: dl.Item, context: dl.Context):
