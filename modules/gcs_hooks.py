@@ -1,6 +1,7 @@
 from google.cloud import storage
 import dtlpy as dl
 import logging
+import base64
 import json
 import os
 
@@ -10,15 +11,16 @@ logger = logging.getLogger(name='GCS Export & Import')
 
 class HookIntegrationGCS(dl.BaseServiceRunner):
     def __init__(self, integration_name):
-        try:
-            _ = self.service_entity
-            credentials = os.environ.get(integration_name)
+        credentials = os.environ.get(integration_name.replace('-', '_'))
+        if credentials is not None:
             logger.info(f"integration_name = {integration_name}")
+            credentials = base64.b64decode(credentials)
+            credentials = credentials.decode("utf-8")
             credentials = json.loads(credentials)
+            credentials = json.loads(credentials['content'])
             self.client = storage.Client.from_service_account_info(info=credentials)
-        except AssertionError:
-            self.client = storage.Client.from_service_account_json(os.path.join('..',
-                                                                                'gcp-credentials.json'))
+        else:
+            self.client = storage.Client.from_service_account_json(os.path.join('..', 'gcp-credentials.json'))
 
     def export_annotation(self, item: dl.Item, context: dl.Context):
         if context is not None and context.node is not None and 'customNodeConfig' in context.node.metadata:
@@ -57,7 +59,7 @@ def test():
             self.metadata = metadata
 
     dl.setenv('rc')
-    service_runner = HookIntegrationGCS(integration_name="")
+    service_runner = HookIntegrationGCS(integration_name="<integration name>")
     original_item = dl.items.get(item_id='65c1160e06359112b9e8e980')
     original_annotations = original_item.annotations.list()
     remote_filepath = "/clones/1.jpg"

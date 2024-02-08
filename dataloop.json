@@ -10,9 +10,6 @@
   "version": "1.0.0",
   "icon": "icon-dl-function",
   "scope": "project",
-  "context": {
-    "project": "952eeca4-32c1-4563-accf-1a96339c04b9"
-  },
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/gcs-hooks.git",
@@ -55,6 +52,7 @@
               "title": "Bucket Name",
               "props": {
                 "type": "string",
+                "title": true,
                 "required": true,
                 "placeholder": "Insert bucket name"
               },
