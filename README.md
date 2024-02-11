@@ -21,12 +21,12 @@ Both GCS-hooks nodes get the same item as input and output
 ### Export Annotations to GCS
 When an item passes through the node, will export the annotations to a json file and upload it to the GCS bucket. \
 The file will be uploaded to the following location: \
-`<bucket_name>/<item.dir>/<item.name>.json`
+`<driver_path>/<item.dir>/<item.name>.json`
 
 ### Import Annotations from GCS
 When an item passes through the node, will download the JSON annotations file from the GCS bucket and update the item with the new annotations. \
 The file will be downloaded from the following location: \
-`<bucket_name>/<item.dir>/<item.name>.json`
+`<driver_path>/<item.dir>/<item.name>.json`
 
 
 ## Node Configuration TBD:
