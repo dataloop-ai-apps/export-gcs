@@ -1,6 +1,7 @@
 {
   "displayName": "GCS Hooks",
   "name": "gcs-hooks",
+  "description": "Import and Export annotations to GCS bucket",
   "attributes": {
     "Provider": "Google",
     "Category": "Pipeline",
