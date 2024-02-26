@@ -175,23 +175,14 @@
         "moduleName": "gcs-hooks",
         "runtime": {
           "podType": "regular-xs",
-          "numReplicas": 1,
           "concurrency": 10,
-          "pyPackages": {},
-          "singleAgent": false,
           "autoscaler": {
-            "type": "rabbitmq",
             "minReplicas": 0,
             "maxReplicas": 2,
             "queueLength": 10
           },
-          "preemptible": false,
-          "executionTimeout": 3600,
-          "drainTime": 600,
-          "onReset": "failed",
-          "runExecutionAsProcess": false
-        },
-        "maxAttempts": 3
+          "executionTimeout": 3600
+        }
       }
     ]
   }
