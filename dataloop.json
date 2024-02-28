@@ -120,7 +120,7 @@
     ],
     "modules": [
       {
-        "name": "gcs-hooks",
+        "name": "GCSExport",
         "entryPoint": "modules/gcs_hooks.py",
         "className": "HookIntegrationGCS",
         "initInputs": [

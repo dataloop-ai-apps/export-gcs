@@ -56,7 +56,6 @@ def test():
         def __init__(self, metadata):
             self.metadata = metadata
 
-    dl.setenv('rc')
     service_runner = GCSExport(integration_name="")
     original_item = dl.items.get(item_id='')
     original_annotations = original_item.annotations.list()
