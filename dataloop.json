@@ -10,7 +10,7 @@
   },
   "version": "1.0.1",
   "icon": "icon-dl-function",
-  "scope": "project",
+  "scope": "public",
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/export-gcs.git",
