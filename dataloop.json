@@ -27,7 +27,7 @@
         "categories": ["data"],
         "displayName": "GCS Export Annotations",
         "description": "Export an item annotations to GCS bucket",
-        "scope": "project",
+        "scope": "node",
         "configuration": {
           "fields": [
             {
@@ -77,7 +77,7 @@
         "categories": ["data"],
         "displayName": "GCS Import Annotations",
         "description": "Import an annotations to an item from GCS bucket",
-        "scope": "project",
+        "scope": "node",
         "configuration": {
           "fields": [
             {
