@@ -4,9 +4,11 @@
   "description": "Import and Export annotations to GCS bucket, Requires GCS Integration in Dataloop, Refer to Data Governance for more information",
   "attributes": {
     "Provider": "Google",
-    "Category": "Pipeline",
-    "Pipeline Type": "Node",
-    "Node Type":"Data"
+    "Category": "Application",
+    "Application Type": [
+      "Pipeline Node",
+      "Data Management"
+    ]
   },
   "version": "1.0.6",
   "icon": "icon-dl-function",
@@ -24,7 +26,9 @@
           "namespace": "gcs-hooks.export_annotation"
         },
         "name": "GCS Export Annotations",
-        "categories": ["data"],
+        "categories": [
+          "data"
+        ],
         "displayName": "GCS Export Annotations",
         "description": "Export an item annotations to GCS bucket",
         "scope": "node",
@@ -74,7 +78,9 @@
           "namespace": "gcs-hooks.import_annotation"
         },
         "name": "GCS Import Annotations",
-        "categories": ["data"],
+        "categories": [
+          "data"
+        ],
         "displayName": "GCS Import Annotations",
         "description": "Import an annotations to an item from GCS bucket",
         "scope": "node",
