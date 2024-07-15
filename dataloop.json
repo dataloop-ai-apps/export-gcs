@@ -11,13 +11,13 @@
       "Data Management"
     ]
   },
-  "version": "1.0.6",
+  "version": "1.0.7",
   "icon": "icon-dl-function",
   "scope": "public",
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/export-gcs.git",
-    "gitTag": "1.0.6"
+    "gitTag": "1.0.7"
   },
   "components": {
     "pipelineNodes": [
