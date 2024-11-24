@@ -9,7 +9,10 @@
       "Pipeline Node",
       "Data Management"
     ],
-    "Media Type": ["All Media Types"]
+    "Media Type": [
+      "All Media Types"
+    ],
+    "License": "Apache 2.0"
   },
   "version": "1.0.11",
   "icon": "icon-dl-function",
