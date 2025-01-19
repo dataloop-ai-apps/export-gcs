@@ -32,6 +32,7 @@ When an item passes through the node, the node will download the item JSON annot
 The file will be downloaded from the following location: \
 `<driver_path>/<item.dir>/<item.name>.json`
 
+
 ## Setting Up Your GCP Project
 
 To use these nodes, you need a Google Cloud Platform (GCP) project. Follow these steps to get started:
@@ -43,6 +44,7 @@ To use these nodes, you need a Google Cloud Platform (GCP) project. Follow these
 2. Create a GCP [Bucket](https://docs.dataloop.ai/docs/private-key-integration#:~:text=the%20integration%20phase.-,Create%20a%20Cloud%20Storage%20Bucket,-Log%20in%20to)
     - Go to the Cloud Storage section in the GCP Console.
     - Create a new bucket.
+
 
 ## Integrating GCS Export & Import API with Dataloop Platform
 
