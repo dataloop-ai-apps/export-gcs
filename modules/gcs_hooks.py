@@ -11,15 +11,19 @@ logger = logging.getLogger(name='GCS Export & Import')
 
 class GCSExport(dl.BaseServiceRunner):
     def __init__(self):
-        if os.environ.get("GOOGLE_API_KEY") is None:
-            raise ValueError(f"Missing API key")
-        credentials = os.environ.get("GOOGLE_API_KEY")
+        self.logger = logger
+        self.logger.info('Initializing Google Vision API client')
+        raw_credentials = os.environ.get("GCP_SERVICE_ACCOUNT", None)
+        if raw_credentials is None:
+            raise ValueError(f"Missing GCP service account json.")
 
         # for case of integration
-        credentials = base64.b64decode(credentials)
-        credentials = credentials.decode("utf-8")
-        credentials = json.loads(credentials)
-        credentials = json.loads(credentials['content'])
+        try:
+            credentials = json.loads(raw_credentials)
+        except json.JSONDecodeError:
+            decoded_credentials = base64.b64decode(raw_credentials).decode("utf-8")
+            credentials_json = json.loads(decoded_credentials)
+            credentials = json.loads(credentials_json['content'])
         self.client = storage.Client.from_service_account_info(info=credentials)
 
     def export_annotation(self, item: dl.Item, context: dl.Context):

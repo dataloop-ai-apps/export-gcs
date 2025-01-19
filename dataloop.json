@@ -136,7 +136,7 @@
         "entryPoint": "modules/gcs_hooks.py",
         "className": "GCSExport",
         "integrations": [
-          "dl-google-api-key"
+           "dl-gcp-service-account"
         ],
         "initInputs": [],
         "functions": [
