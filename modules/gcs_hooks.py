@@ -10,8 +10,10 @@ logger = logging.getLogger(name='GCS Export & Import')
 
 
 class GCSExport(dl.BaseServiceRunner):
-    def __init__(self, integration_name):
-        credentials = os.environ.get(integration_name.replace('-', '_'))
+    def __init__(self):
+        if os.environ.get("GOOGLE_API_KEY") is None:
+            raise ValueError(f"Missing API key")
+        credentials = os.environ.get("GOOGLE_API_KEY")
 
         # for case of integration
         credentials = base64.b64decode(credentials)

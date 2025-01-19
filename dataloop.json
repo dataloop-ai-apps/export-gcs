@@ -6,7 +6,10 @@
     "Provider": "Google",
     "Deployed By": "Google",
     "Category": "Application",
-    "Application Type": "Data Management",
+    "Application Type": [
+      "Pipeline Node",
+      "Data Management"
+    ],
     "Media Type": [
       "All Media Types"
     ],
@@ -131,11 +134,8 @@
         "name": "gcs-hooks",
         "entryPoint": "modules/gcs_hooks.py",
         "className": "GCSExport",
-        "initInputs": [
-          {
-            "type": "staring",
-            "name": "integration_name"
-          }
+        "integrations": [
+          "dl-google-api-key"
         ],
         "functions": [
           {
