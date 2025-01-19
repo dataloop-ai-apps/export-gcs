@@ -2,7 +2,7 @@ import os
 import unittest
 import dtlpy as dl
 
-from modules.gcs_hooks import HookIntegrationGCS
+from modules.gcs_hooks import GCSExport
 
 
 class Node:
@@ -12,7 +12,9 @@ class Node:
 
 class TestRunner(unittest.TestCase):
     def setUp(self):
-        self.runner = HookIntegrationGCS(integration_name='gcs-integration')
+        integration_name = ""
+        os.environ["GOOGLE_API_KEY"] = integration_name
+        self.runner = GCSExport()
         self.original_item = dl.items.get(item_id='658ae4cd160fb30cdebf1156')
         self.original_annotations = self.original_item.annotations.list()
         remote_filepath = "/clones/1.jpg"

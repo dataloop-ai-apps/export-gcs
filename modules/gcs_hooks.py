@@ -58,7 +58,9 @@ def test():
         def __init__(self, metadata):
             self.metadata = metadata
 
-    service_runner = GCSExport(integration_name="")
+    integration_name = ""
+    os.environ["GOOGLE_API_KEY"] = integration_name
+    service_runner = GCSExport()
     original_item = dl.items.get(item_id='')
     original_annotations = original_item.annotations.list()
     remote_filepath = "/clones/1.jpg"
