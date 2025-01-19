@@ -62,8 +62,7 @@ def test():
         def __init__(self, metadata):
             self.metadata = metadata
 
-    integration_name = ""
-    os.environ["GOOGLE_API_KEY"] = integration_name
+    os.environ["GCP_SERVICE_ACCOUNT"] = ""
     service_runner = GCSExport()
     original_item = dl.items.get(item_id='')
     original_annotations = original_item.annotations.list()

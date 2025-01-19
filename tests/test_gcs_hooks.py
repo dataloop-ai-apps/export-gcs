@@ -12,8 +12,7 @@ class Node:
 
 class TestRunner(unittest.TestCase):
     def setUp(self):
-        integration_name = ""
-        os.environ["GOOGLE_API_KEY"] = integration_name
+        os.environ["GCP_SERVICE_ACCOUNT"] = ""
         self.runner = GCSExport()
         self.original_item = dl.items.get(item_id='658ae4cd160fb30cdebf1156')
         self.original_annotations = self.original_item.annotations.list()
