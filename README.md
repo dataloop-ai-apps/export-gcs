@@ -10,7 +10,7 @@ The **GCS Hooks** application has two nodes to Export and Import annotation dire
 3. Define the bucket name in the node configuration panel.
 4. Start pipeline
 
-Pre-requirements: The GCS-hooks service needs an integration of `GOOGLE_API_KEY` secret key.  
+Pre-requirements: The GCS-hooks service needs an integration of `GCP_SERVICE_ACCOUNT` that holds the service account json data. 
 
 
 ## Node inputs and Outputs:
