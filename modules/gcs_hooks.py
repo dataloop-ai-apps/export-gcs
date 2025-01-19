@@ -12,7 +12,7 @@ logger = logging.getLogger(name='GCS Export & Import')
 class GCSExport(dl.BaseServiceRunner):
     def __init__(self):
         self.logger = logger
-        self.logger.info('Initializing Google GCS Export & Import API client')
+        self.logger.info('Initializing GCS Export & Import API client')
         raw_credentials = os.environ.get("GCP_SERVICE_ACCOUNT", None)
         if raw_credentials is None:
             raise ValueError(f"Missing GCP service account json.")
