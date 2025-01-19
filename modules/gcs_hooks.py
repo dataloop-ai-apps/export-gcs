@@ -11,19 +11,23 @@ logger = logging.getLogger(name='GCS Export & Import')
 
 class GCSExport(dl.BaseServiceRunner):
     def __init__(self):
+        """
+        Initializes the ServiceRunner with GCS Export & Import API credentials.
+        """
         self.logger = logger
         self.logger.info('Initializing GCS Export & Import API client')
         raw_credentials = os.environ.get("GCP_SERVICE_ACCOUNT", None)
         if raw_credentials is None:
             raise ValueError(f"Missing GCP service account json.")
 
-        # for case of integration
         try:
-            credentials = json.loads(raw_credentials)
-        except json.JSONDecodeError:
             decoded_credentials = base64.b64decode(raw_credentials).decode("utf-8")
             credentials_json = json.loads(decoded_credentials)
             credentials = json.loads(credentials_json['content'])
+        except Exception:
+            raise ValueError(f"Failed to decode the service account json. "
+                             f"Follow this link ReadMe to check how to properly use GCP service account with Dataloop:"
+                             f"https://github.com/dataloop-ai-apps/export-gcs/blob/main/README.md")
         self.client = storage.Client.from_service_account_info(info=credentials)
 
     def export_annotation(self, item: dl.Item, context: dl.Context):
