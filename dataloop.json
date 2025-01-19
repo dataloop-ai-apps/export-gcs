@@ -138,6 +138,7 @@
         "integrations": [
           "dl-google-api-key"
         ],
+        "initInputs": [],
         "functions": [
           {
             "name": "export_annotation",
