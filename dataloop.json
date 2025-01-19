@@ -114,6 +114,7 @@
               "title": "Bucket Name",
               "props": {
                 "type": "string",
+                "title": true,
                 "required": true,
                 "placeholder": "Insert bucket name"
               },
