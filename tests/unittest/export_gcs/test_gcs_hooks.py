@@ -13,7 +13,7 @@ class Node:
 class TestRunner(unittest.TestCase):
     def setUp(self):
         item_id = "658ae4cd160fb30cdebf1156"
-        bucket_name = "micha-storage"
+        bucket_name = ""
         remote_filepath = "/clones/1.jpg"
 
         # Connect .env file
