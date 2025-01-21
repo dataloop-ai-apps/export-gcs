@@ -4,7 +4,7 @@
   "description": "Import and Export annotations to GCS bucket, Requires GCS Integration in Dataloop, Refer to Data Governance for more information",
   "attributes": {
     "Provider": "Google",
-    "Deployed By": "Google",
+    "Deployed By": "Dataloop",
     "Category": "Application",
     "Application Type": [
       "Pipeline Node",
