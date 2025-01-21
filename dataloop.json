@@ -61,8 +61,8 @@
               "name": "bucket_name",
               "title": "Bucket Name",
               "props": {
-                "type": "string",
                 "title": true,
+                "type": "string",
                 "required": true,
                 "placeholder": "Insert bucket name"
               },
@@ -113,8 +113,8 @@
               "name": "bucket_name",
               "title": "Bucket Name",
               "props": {
-                "type": "string",
                 "title": true,
+                "type": "string",
                 "required": true,
                 "placeholder": "Insert bucket name"
               },
