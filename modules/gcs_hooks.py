@@ -59,32 +59,3 @@ class GCSExport(dl.BaseServiceRunner):
         data = json.loads(bytes_data.decode('utf-8'))
         item.annotations.upload(annotations=data['annotations'])
         return item
-
-
-def test():
-    class Node:
-        def __init__(self, metadata):
-            self.metadata = metadata
-
-    os.environ["GCP_SERVICE_ACCOUNT"] = ""
-    service_runner = GCSExport()
-    original_item = dl.items.get(item_id='')
-    original_annotations = original_item.annotations.list()
-    remote_filepath = "/clones/1.jpg"
-    try:
-        item = original_item.dataset.items.get(filepath=remote_filepath)
-        item.delete()
-    except dl.exceptions.NotFound:
-        pass
-
-    item = original_item.clone(remote_filepath=remote_filepath)
-    context = dl.Context()
-    context._node = Node(metadata={'customNodeConfig': {'bucket_name': ''}})
-    service_runner.export_annotation(item=item, context=context)
-    item.annotations.delete(filters=dl.Filters(resource=dl.FiltersResource.ANNOTATION))
-    service_runner.import_annotation(item=item, context=context)
-    assert len(item.annotations.list()) == len(original_annotations)
-
-
-if __name__ == '__main__':
-    test()
