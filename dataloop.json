@@ -4,6 +4,7 @@
   "description": "Import and Export annotations to GCS bucket, Requires GCS Integration in Dataloop, Refer to Data Governance for more information",
   "attributes": {
     "Provider": "Google",
+    "Deployed By": "Dataloop",
     "Category": "Application",
     "Application Type": [
       "Pipeline Node",
@@ -60,8 +61,8 @@
               "name": "bucket_name",
               "title": "Bucket Name",
               "props": {
-                "type": "string",
                 "title": true,
+                "type": "string",
                 "required": true,
                 "placeholder": "Insert bucket name"
               },
@@ -112,6 +113,7 @@
               "name": "bucket_name",
               "title": "Bucket Name",
               "props": {
+                "title": true,
                 "type": "string",
                 "required": true,
                 "placeholder": "Insert bucket name"
@@ -133,12 +135,10 @@
         "name": "gcs-hooks",
         "entryPoint": "modules/gcs_hooks.py",
         "className": "GCSExport",
-        "initInputs": [
-          {
-            "type": "staring",
-            "name": "integration_name"
-          }
+        "integrations": [
+           "dl-gcp-service-account"
         ],
+        "initInputs": [],
         "functions": [
           {
             "name": "export_annotation",
@@ -185,6 +185,7 @@
         "moduleName": "gcs-hooks",
         "runtime": {
           "podType": "regular-xs",
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/export-gcs:0.0.1",
           "concurrency": 10,
           "autoscaler": {
             "minReplicas": 0,

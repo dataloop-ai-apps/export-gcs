@@ -10,14 +10,24 @@ logger = logging.getLogger(name='GCS Export & Import')
 
 
 class GCSExport(dl.BaseServiceRunner):
-    def __init__(self, integration_name):
-        credentials = os.environ.get(integration_name.replace('-', '_'))
+    def __init__(self):
+        """
+        Initializes the ServiceRunner with GCS Export & Import API credentials.
+        """
+        self.logger = logger
+        self.logger.info('Initializing GCS Export & Import API client')
+        raw_credentials = os.environ.get("GCP_SERVICE_ACCOUNT", None)
+        if raw_credentials is None:
+            raise ValueError(f"Missing GCP service account json.")
 
-        # for case of integration
-        credentials = base64.b64decode(credentials)
-        credentials = credentials.decode("utf-8")
-        credentials = json.loads(credentials)
-        credentials = json.loads(credentials['content'])
+        try:
+            decoded_credentials = base64.b64decode(raw_credentials).decode("utf-8")
+            credentials_json = json.loads(decoded_credentials)
+            credentials = json.loads(credentials_json['content'])
+        except Exception:
+            raise ValueError("Failed to decode the service account JSON. Refer to the guide for proper GCP service "
+                             "account usage with Dataloop: "
+                             "https://github.com/dataloop-ai-apps/export-gcs/blob/main/README.md")
         self.client = storage.Client.from_service_account_info(info=credentials)
 
     def export_annotation(self, item: dl.Item, context: dl.Context):
@@ -49,31 +59,3 @@ class GCSExport(dl.BaseServiceRunner):
         data = json.loads(bytes_data.decode('utf-8'))
         item.annotations.upload(annotations=data['annotations'])
         return item
-
-
-def test():
-    class Node:
-        def __init__(self, metadata):
-            self.metadata = metadata
-
-    service_runner = GCSExport(integration_name="")
-    original_item = dl.items.get(item_id='')
-    original_annotations = original_item.annotations.list()
-    remote_filepath = "/clones/1.jpg"
-    try:
-        item = original_item.dataset.items.get(filepath=remote_filepath)
-        item.delete()
-    except dl.exceptions.NotFound:
-        pass
-
-    item = original_item.clone(remote_filepath=remote_filepath)
-    context = dl.Context()
-    context._node = Node(metadata={'customNodeConfig': {'bucket_name': ''}})
-    service_runner.export_annotation(item=item, context=context)
-    item.annotations.delete(filters=dl.Filters(resource=dl.FiltersResource.ANNOTATION))
-    service_runner.import_annotation(item=item, context=context)
-    assert len(item.annotations.list()) == len(original_annotations)
-
-
-if __name__ == '__main__':
-    test()

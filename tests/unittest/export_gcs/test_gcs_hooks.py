@@ -2,7 +2,7 @@ import os
 import unittest
 import dtlpy as dl
 
-from modules.gcs_hooks import HookIntegrationGCS
+from modules.gcs_hooks import GCSExport
 
 
 class Node:
@@ -12,19 +12,24 @@ class Node:
 
 class TestRunner(unittest.TestCase):
     def setUp(self):
-        self.runner = HookIntegrationGCS(integration_name='gcs-integration')
-        self.original_item = dl.items.get(item_id='658ae4cd160fb30cdebf1156')
-        self.original_annotations = self.original_item.annotations.list()
+        item_id = "658ae4cd160fb30cdebf1156"
+        bucket_name = ""
         remote_filepath = "/clones/1.jpg"
+
+        # Connect .env file
+        if os.environ.get("GCP_SERVICE_ACCOUNT") is None:
+            raise ValueError("Missing GCP service account json.")
+        self.runner = GCSExport()
+        self.original_item = dl.items.get(item_id=item_id)
+        self.original_annotations = self.original_item.annotations.list()
         try:
             item = self.original_item.dataset.items.get(filepath=remote_filepath)
             item.delete()
         except dl.exceptions.NotFound:
             pass
-
         self.item = self.original_item.clone(remote_filepath=remote_filepath)
         self.context = dl.Context()
-        self.context._node = Node(metadata={'customNodeConfig': {'bucket_name': 'micha-storage'}})
+        self.context._node = Node(metadata={'customNodeConfig': {'bucket_name': bucket_name}})
 
     def test_export_annotations(self):
         self.runner.export_annotation(item=self.item, context=self.context)
