@@ -15,13 +15,13 @@
     ],
     "License": "Apache 2.0"
   },
-  "version": "1.0.12",
+  "version": "1.0.13",
   "icon": "icon-dl-function",
   "scope": "public",
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/export-gcs.git",
-    "gitTag": "1.0.12"
+    "gitTag": "1.0.13"
   },
   "components": {
     "pipelineNodes": [
