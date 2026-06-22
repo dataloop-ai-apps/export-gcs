@@ -1,10 +1,10 @@
 {
   "displayName": "GCS Export",
   "name": "gcs-export",
-  "description": "Import and Export annotations to GCS bucket, Requires GCS Integration in Dataloop, Refer to Data Governance for more information",
+  "description": "Import and Export annotations to GCS bucket, Requires GCS Integration in DDOE, Refer to Data Governance for more information",
   "attributes": {
     "Provider": "Google",
-    "Deployed By": "Dataloop",
+    "Deployed By": "DDOE",
     "Category": "Application",
     "Application Type": [
       "Pipeline Node",

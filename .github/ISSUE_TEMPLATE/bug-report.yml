@@ -15,7 +15,7 @@ body:
         Do you know the source of the bug?
       multiple: true
       options:
-        - "Dataloop platform"
+        - "DDOE platform"
         - "App source code"
         - "Usage"
         - "Custom data"

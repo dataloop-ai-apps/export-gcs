@@ -26,7 +26,7 @@ class GCSExport(dl.BaseServiceRunner):
             credentials = json.loads(credentials_json['content'])
         except Exception:
             raise ValueError("Failed to decode the service account JSON. Refer to the guide for proper GCP service "
-                             "account usage with Dataloop: "
+                             "account usage with DDOE: "
                              "https://github.com/dataloop-ai-apps/export-gcs/blob/main/README.md")
         self.client = storage.Client.from_service_account_info(info=credentials)
 
