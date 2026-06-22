@@ -46,9 +46,9 @@ To use these nodes, you need a Google Cloud Platform (GCP) project. Follow these
     - Create a new bucket.
 
 
-## Integrating GCS Export & Import API with Dataloop Platform
+## Integrating GCS Export & Import API with DDOE Platform
 
-- Visit the [Dataloop Marketplace](https://docs.dataloop.ai/docs/marketplace), under Applications tab.
+- Visit the [DDOE Marketplace](https://docs.dataloop.ai/docs/marketplace), under Applications tab.
 - Select the application and click on "Install" and then "Proceed".
   ![marketplace.png](assets/marketplace.png)
 - Select an existing GCP integration or add a new one by importing the JSON file you previously downloaded.
